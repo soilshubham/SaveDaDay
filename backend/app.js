@@ -12,7 +12,11 @@ app.use(express.json());
 app.use('/user', userRouter)
 
 mongoose.connect(
+<<<<<<< HEAD
   process.env.MONGODB_URL,
+=======
+  "<MongoDB URL>",
+>>>>>>> 0780c833b44b6409d5e17b335e54a4a25e87a8c6
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => {
     console.log("Connected to MongoDB");
