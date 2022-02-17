@@ -11,7 +11,7 @@ app.use(express.json());
 app.use('/user', userRouter)
 
 mongoose.connect(
-  "mongodb+srv://admin:admin%40sahil@sahil-cluster.oosyg.mongodb.net/quotes-app?retryWrites=true&w=majority",
+  "<MongoDB URL>",
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => {
     console.log("Connected to MongoDB");
