@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require("express");
 const userRouter = express.Router();
 const passport = require("passport");
 const passportConfig = require("../passport");
 const JWT = require("jsonwebtoken");
 const User = require('../models/User');
-const Todo = require('../models/Todo');
+const Birthday = require('../models/Birthday');
 
 
 const signToken = userId => {
@@ -12,7 +13,7 @@ const signToken = userId => {
         iss: 'sahil',
         sub: userId,
         iat: new Date().getTime(),
-    }, "secret123", { expiresIn: "1h" })
+    }, process.env.JWT_SECRET_KEY, { expiresIn: "1h" })
 }
 
 userRouter.post("/register", (req, res) => {
@@ -49,29 +50,29 @@ userRouter.get("/logout", passport.authenticate('jwt', { session: false }), (req
     res.json({ user: { username: "", role: "" }, status: true })
 });
 
-userRouter.post("/create-todo", passport.authenticate('jwt', { session: false }), (req, res) => {
-    const todo = new Todo(req.body)
-    todo.save(err => {
+userRouter.post("/add-bday", passport.authenticate('jwt', { session: false }), (req, res) => {
+    const bday = new Birthday(req.body)
+    bday.save(err => {
         if (err)
             res.status(500).json({ message: "Error has occured", msgError: true })
         else {
-            req.user.todos.push(todo);
+            req.user.birthdays.push(bday);
             req.user.save(err => {
                 if (err)
                     res.status(500).json({ message: "Error has occured", msgError: true })
                 else
-                    res.status(200).json({ message: "Todo successfully created", msgError: false })
+                    res.status(200).json({ message: "Birthday successfully created", msgError: false })
             })
         }
     })
 });
 
-userRouter.get("/todos", passport.authenticate('jwt', { session: false }), (req, res) => {
-    User.findById({ _id: req.user._id }).populate('todos').exec((err, document) => {
+userRouter.get("/birthdays", passport.authenticate('jwt', { session: false }), (req, res) => {
+    User.findById({ _id: req.user._id }).populate('birthdays').exec((err, document) => {
         if (err)
             res.status(500).json({ message: "Error has occured", msgError: true })
         else {
-            res.status(200).json({ todos: document.todos, authenticated: true })
+            res.status(200).json({ birthdays: document.birthdays, authenticated: true })
         }
     })
 });

@@ -17,9 +17,9 @@ const UserSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         required: true
     },
-    todos: [{
+    birthdays: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Todo'
+        ref: 'Birthday'
     }]
 });
 

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
@@ -14,7 +15,7 @@ const cookieExtractor = (req) => {
 // Authorization 
 passport.use(new JwtStrategy({
     jwtFromRequest: cookieExtractor,
-    secretOrKey: "secret123"
+    secretOrKey: process.env.JWT_SECRET_KEY
 }, (payload, done) => {
     User.findById(payload.sub, (err, user) => {
         if (err)
