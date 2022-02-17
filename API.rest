@@ -1,0 +1,41 @@
+### Register Request
+POST http://localhost:5000/user/register HTTP/1.1
+content-type: application/json
+
+{
+    "username": "test",
+    "password": "temp123",
+    "role": "user"
+}
+
+### Login Request
+POST http://localhost:5000/user/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "test",
+    "password": "temp123"
+}
+
+### Logout Request
+GET http://localhost:5000/user/logout HTTP/1.1
+
+
+### Create Todo Request
+POST http://localhost:5000/user/create-todo HTTP/1.1
+content-type: application/json
+
+{
+    "name": "test todo #4"
+}
+
+### Fetch Todos Request
+GET http://localhost:5000/user/todos HTTP/1.1
+
+
+### Verify admin Request
+GET http://localhost:5000/user/admin HTTP/1.1
+
+
+### Authenticate user Request
+GET http://localhost:5000/user/authenticated HTTP/1.1
