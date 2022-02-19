@@ -8,7 +8,7 @@ const UpcomingBirthdays = (props) => {
                 <h2 className="text-xl md:text-2xl font-medium">
                     Upcoming
                 </h2>
-                <button className="font-normal flex items-center justify-center gap-2">
+                <button className="font-normal flex items-center justify-center gap-2 md:hover:text-primary transition-all">
                     <span className="text-base">View All</span>
                     <RightArrowIcon />
                 </button>
