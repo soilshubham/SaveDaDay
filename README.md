@@ -1,1 +1,2 @@
 # Birthday-Reminder
+NextJs + TailwindCSS
