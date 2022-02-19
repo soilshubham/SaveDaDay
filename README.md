@@ -1,2 +1,6 @@
 # Birthday-Reminder
-NextJs + TailwindCSS
+
+## [ Work In Progress ]
+
+- **Frontend**: `NextJs` + `TailwindCSS`
+- **Backend**: `ExpressJs` + `MongoDB`
