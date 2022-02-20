@@ -7,13 +7,13 @@ const Dashboard = () => {
     return (
         <>
             <Navbar />
-            <div className="bg-bgColor h-screen pt-16 md:pt-20">
-                <div className="container p-4">
+            <div className="bg-bgColor min-h-screen pt-14 md:pt-3 md:pb-20">
+                <div className="container p-4 lg:max-w-4xl md:max-w-2xl">
                     <DashHeader />
                     <UpcomingBirthdays />
+                    <AddBirthdayBtn />
                 </div>
             </div>
-            <AddBirthdayBtn />
         </>
     )
 }

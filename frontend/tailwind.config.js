@@ -14,6 +14,7 @@ module.exports = {
       "bgColor": "#F6F8FA",
       "foreColor": "#ffffff",
       "fadedColor": "rgb(100 116 139);",
+      "fadedColor2": "rgba(100, 116, 139, 0.4);",
       "shadowColor": "rgba(0, 0, 0, 0.08)",
       "white": "#ffffff",
     },
