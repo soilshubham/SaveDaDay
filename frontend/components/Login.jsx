@@ -12,6 +12,10 @@ export default (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (username === "" || password === "") {
+      alert("Please fill all the fields");
+      return;
+    }
     AuthService.login({ username, password })
       .then((data) => {
         const { isAuthenticated, user, message } = data;
