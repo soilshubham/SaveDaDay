@@ -36,6 +36,7 @@ userRouter.post("/register", (req, res) => {
     })
 });
 
+
 userRouter.post("/login", passport.authenticate('local', { session: false }), (req, res) => {
     if (req.isAuthenticated()) {
         const { _id, name, username, role } = req.user;

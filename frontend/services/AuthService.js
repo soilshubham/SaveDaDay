@@ -28,8 +28,6 @@ export default {
             else
                 return { isAuthenticated: false, user: { username: "", role: "" } }
 
-        }).catch(err => {
-            return { isAuthenticated: false, user: { username: "", role: "" } }
-        })
+        }).catch(err => { return { isAuthenticated: false, user: { username: "", role: "" } } })
     }
 }
