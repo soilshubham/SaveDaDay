@@ -2,6 +2,7 @@ export default {
     login: user => {
         return fetch(`http://localhost:5000/user/login`, {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -13,7 +14,6 @@ export default {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
             },
             body: JSON.stringify(user)
         }).then(res => res.json()).then(data => data)

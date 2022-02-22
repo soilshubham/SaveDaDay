@@ -17,7 +17,7 @@ const signToken = userId => {
 }
 
 userRouter.post("/register", (req, res) => {
-    const { username, password, role } = req.body;
+    const { name, username, password, role } = req.body;
 
     User.findOne({ username }, (err, user) => {
         if (err)
@@ -25,7 +25,7 @@ userRouter.post("/register", (req, res) => {
         if (user)
             res.status(400).json({ message: "Username already exists", msgError: true })
         else {
-            const newUser = new User({ username, password, role })
+            const newUser = new User({ name, username, password, role })
             newUser.save((err, user) => {
                 if (err)
                     res.status(500).json({ message: "Error has occured", msgError: true })
@@ -38,10 +38,10 @@ userRouter.post("/register", (req, res) => {
 
 userRouter.post("/login", passport.authenticate('local', { session: false }), (req, res) => {
     if (req.isAuthenticated()) {
-        const { _id, username, role } = req.user;
+        const { _id, name, username, role } = req.user;
         const token = signToken(_id);
-        res.cookie('access_token', token, { httpOnly: true, sameSite: true })
-        res.status(200).json({ isAuthenticated: true, user: { _id, username, role } })
+        res.cookie('access_token', token, { httpOnly: true, sameSite: 'none', secure: true });
+        res.status(200).json({ isAuthenticated: true, user: { _id, name, username, role } })
     }
 });
 
