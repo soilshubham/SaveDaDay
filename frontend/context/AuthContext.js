@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import Spinner from '../components/Spinner';
 import AuthService from '../services/AuthService';
 
 export const AuthContext = createContext();
@@ -20,11 +21,14 @@ export const AuthProvider = ({ children }) => {
         <div>
             {
                 !isLoaded
-                    ? <div>Loading...</div>
+                    ?
+                    <div className="flex justify-center items-center min-h-screen">
+                        <Spinner />
+                    </div>
                     : <AuthContext.Provider value={{ user, setUser, isAuthenticated, setIsAuthenticated }}>
                         {children}
                     </AuthContext.Provider>
             }
-        </div>
+        </div >
     )
 }
