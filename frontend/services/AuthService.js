@@ -19,10 +19,22 @@ export default {
         }).then(res => res.json()).then(data => data)
     },
     logout: () => {
-        return fetch(`http://localhost:5000/user/logout`).then(res => res.json()).then(data => data)
+        return fetch(`http://localhost:5000/user/logout`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json()).then(data => data)
     },
     isAuthenticated: () => {
-        return fetch(`http://localhost:5000/user/authenticated`).then(res => {
+        return fetch(`http://localhost:5000/user/authenticated`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => {
             if (res.status !== 401)
                 return res.json().then(data => data)
             else

@@ -1,6 +1,6 @@
 import AllBirthdays from "../../components/AllBirthdays";
 import AddBirthdayBtn from "../../components/AddBirthdayBtn";
-import DashHeader from "../../components/DashHeader";
+import withAuth from "../../hoc/withAuth";
 
 const Birthdays = () => {
     return (
@@ -11,4 +11,4 @@ const Birthdays = () => {
     )
 }
 
-export default Birthdays;
+export default withAuth(Birthdays);
