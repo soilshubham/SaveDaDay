@@ -11,8 +11,8 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Birthday Reminder</title>
-        <meta name="description" content="Remember them birthdays..." />
+        <title>SaveDaDay - Birthday Reminder</title>
+        <meta name="description" content="Don't Forget them birthdays..." />
       </Head>
       <AuthProvider>
         <Navbar />
