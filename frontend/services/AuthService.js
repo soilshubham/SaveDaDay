@@ -41,5 +41,30 @@ export default {
                 return { isAuthenticated: false, user: { username: "", role: "" } }
 
         }).catch(err => { return { isAuthenticated: false, user: { username: "", role: "" } } })
+    },
+    getBirthdays: () => {
+        return fetch(`http://localhost:5000/user/birthdays`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => {
+            if (res.status !== 401)
+                return res.json().then(data => data)
+            else
+                return []
+
+        })
+    },
+    addBirthday: (bday) => {
+        return fetch(`http://localhost:5000/user/add-bday`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bday)
+        }).then(res => res.json()).then(data => data)
     }
 }

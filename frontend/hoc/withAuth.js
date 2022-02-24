@@ -8,16 +8,19 @@ const withAuth = Component => {
         const [isAuthenticated, setIsAuthenticated] = useState(false);
 
         useEffect(() => {
-            AuthService.isAuthenticated().then(data => {
-                if (data.isAuthenticated) {
-                    setIsAuthenticated(true);
-                } else {
-                    Router.replace("/login");
-                }
-            })
+            localStorage.getItem("isLoggedIn")
+                ? AuthService.isAuthenticated().then(data => {
+                    if (data.isAuthenticated) {
+                        setIsAuthenticated(true);
+                    } else {
+                        localStorage.setItem("isLoggedIn", false);
+                        Router.replace("/login");
+                    }
+                })
+                : Router.replace("/login");
         }, [])
 
-        return isAuthenticated ? <Component {...props} /> : "Loading...";
+        return isAuthenticated && <Component {...props} />;
     }
 
     return AuthComponent;
