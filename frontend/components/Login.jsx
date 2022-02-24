@@ -4,6 +4,7 @@ import AuthService from "../services/AuthService";
 import { AuthContext } from "../context/AuthContext";
 import { Toaster } from "react-hot-toast";
 import Toast from "./Toast";
+import Link from "next/link";
 
 export default (props) => {
   const [username, setUsername] = useState("");
@@ -74,6 +75,12 @@ export default (props) => {
             >
               Log in
             </button>
+            <div className="text-center text-fadedColor mt-4">
+              Not a member?{" "}
+              <span className="text-primary hover:underline">
+                <Link href="/register">Sign up now</Link>
+              </span>
+            </div>
           </div>
         </div>
       )}

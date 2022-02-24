@@ -9,7 +9,8 @@ module.exports = {
     },
 
     fontFamily: {
-      'IBMSans': ['"IBM Plex Sans"', 'sans-serif']
+      'IBMSans': ['"IBM Plex Sans"', 'sans-serif'],
+      'Inter': ['"Inter"', 'sans-serif']
     },
     extend: {
       colors: {
