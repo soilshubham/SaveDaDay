@@ -10,6 +10,11 @@ const BirthdaySchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
+    desc: {
+        type: String,
+        required: false,
+        default: "",
+    },
 });
 
 

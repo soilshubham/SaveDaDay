@@ -38,12 +38,14 @@ userRouter.post("/register", (req, res) => {
 
 
 userRouter.post("/login", passport.authenticate('local', { session: false }), (req, res) => {
+    const { _id, name, username, role } = req.user;
     if (req.isAuthenticated()) {
-        const { _id, name, username, role } = req.user;
         const token = signToken(_id);
         res.cookie('access_token', token, { httpOnly: true, sameSite: 'none', secure: true });
         res.status(200).json({ isAuthenticated: true, user: { _id, name, username, role } })
     }
+    else
+        res.status(401).json({ isAuthenticated: false, user: null })
 });
 
 userRouter.get("/logout", passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -55,12 +57,12 @@ userRouter.post("/add-bday", passport.authenticate('jwt', { session: false }), (
     const bday = new Birthday(req.body)
     bday.save(err => {
         if (err)
-            res.status(500).json({ message: "Error has occured", msgError: true })
+            res.status(500).json({ message: err.message, msgError: true })
         else {
             req.user.birthdays.push(bday);
             req.user.save(err => {
                 if (err)
-                    res.status(500).json({ message: "Error has occured", msgError: true })
+                    res.status(500).json({ message: err.message, msgError: true })
                 else
                     res.status(200).json({ message: "Birthday successfully created", msgError: false })
             })
@@ -89,8 +91,8 @@ userRouter.get("/admin", passport.authenticate('jwt', { session: false }), (req,
 });
 
 userRouter.get("/authenticated", passport.authenticate('jwt', { session: false }), (req, res) => {
-    const { username, role } = req.user;
-    res.status(200).json({ isAuthenticated: true, user: { username, role } })
+    const { username, role, name, _id } = req.user;
+    res.status(200).json({ isAuthenticated: true, user: { _id, name, username, role } })
 });
 
 module.exports = userRouter;

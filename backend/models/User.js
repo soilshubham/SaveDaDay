@@ -9,22 +9,28 @@ const UserSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        min: 6,
-        max: 20,
+        minlength: 6,
+        maxlength: 20,
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        min: 6,
+        max: 24,
     },
     role: {
         type: String,
         enum: ['user', 'admin'],
-        required: true
+        default: "user",
     },
     birthdays: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Birthday'
-    }]
+    }],
+    dateCreated: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 UserSchema.pre('save', function (next) {
