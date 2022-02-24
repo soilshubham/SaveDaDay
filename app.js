@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -21,8 +21,12 @@ app.use((req, res, next) => {
 app.use('/user', userRouter)
 
 mongoose.connect(
-  process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true },
+  process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true },
   () => { console.log("Connected to MongoDB") }
 );
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 app.listen(port, () => console.log(`Server started at ${port}!`));

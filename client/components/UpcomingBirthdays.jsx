@@ -42,7 +42,7 @@ const UpcomingBirthdays = (props) => {
         )}
       </div>
       <div className="flex flex-wrap gap-4 mb-32 md:mb-16 md:grid md:grid-cols-3 min-h-[20rem]">
-        {bdays.length > 0 ? (
+        {bdays?.length > 0 ? (
           bdays.map(
             (item, indx) =>
               indx < 3 && (
