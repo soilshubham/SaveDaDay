@@ -1,10 +1,14 @@
 import { BsThreeDotsVertical as DotsIcon } from "react-icons/bs";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import AddBirthday from "./AddBirthday";
 import OutsideClickHandler from "react-outside-click-handler";
-
+import AuthService from "../services/AuthService";
+import { AuthContext } from "../context/AuthContext";
+import Toast from "./Toast";
+import { Toaster } from "react-hot-toast";
 const BirthdayCard = (props) => {
-  console.log(props);
+  const authContext = useContext(AuthContext);
+
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDelModal, setShowDelModal] = useState(false);
   const [showOpt, setShowOpt] = useState(false);
@@ -16,8 +20,23 @@ const BirthdayCard = (props) => {
     const year = date.getFullYear();
     return "" + year + "-" + month + "-" + day;
   };
+
+  const onClickDelete = () => {
+    AuthService.deleteBirthday({ _id: props._id }).then((data) => {
+      const { message, msgError } = data;
+      if (!msgError) {
+        Toast.success(message);
+        authContext.fetchBirthdays();
+        setTimeout(() => setShowDelModal(false), 2000);
+      } else {
+        Toast.error(message);
+      }
+    });
+  };
+
   return (
     <>
+      <Toaster />
       {showEditModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -28,10 +47,13 @@ const BirthdayCard = (props) => {
                 <AddBirthday
                   closeFunc={() => setShowEditModal(false)}
                   edit={{
-                    id: props.bId,
+                    id: props._id,
                     name: props?.name,
                     date: convertStringToDate(props?.date),
                     desc: props?.desc,
+                  }}
+                  onSuccess={(msg) => {
+                    Toast.success(msg);
                   }}
                 />
               </OutsideClickHandler>
@@ -64,7 +86,7 @@ const BirthdayCard = (props) => {
                     <button
                       className="bg-red-500 hover:bg-red-600 text-white font-medium py-3 px-10 rounded"
                       onClick={() => {
-                        props.deleteBirthday(props.bId);
+                        onClickDelete();
                         setShowDelModal(false);
                       }}
                     >

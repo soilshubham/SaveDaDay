@@ -1,15 +1,22 @@
 import { useState } from "react";
 import AddBirthday from "./AddBirthday";
-
+import { Toaster } from "react-hot-toast";
+import Toast from "./Toast";
 const AddBirthdayBtn = (props) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
+      <Toaster />
       {showModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              <AddBirthday closeFunc={() => setShowModal(false)} />
+              <AddBirthday
+                closeFunc={() => setShowModal(false)}
+                onSuccess={(msg) => {
+                  Toast.success(msg);
+                }}
+              />
             </div>
           </div>
           <div className="opacity-50 fixed inset-0 z-40 bg-black"></div>

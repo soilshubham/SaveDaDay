@@ -33,9 +33,9 @@ export default (props) => {
         console.log(data);
         const { message, msgError } = data;
         if (!msgError) {
-          Toast.success(message);
           authContext.fetchBirthdays();
-          setTimeout(() => props.closeFunc(), 2000);
+          props?.onSuccess(message);
+          props.closeFunc();
         } else {
           Toast.error(message);
         }
@@ -49,9 +49,9 @@ export default (props) => {
         console.log(data);
         const { message, msgError } = data;
         if (!msgError) {
-          Toast.success(message);
           authContext.fetchBirthdays();
-          setTimeout(() => props.closeFunc(), 1000);
+          props?.onSuccess(message);
+          props.closeFunc();
         } else {
           Toast.error(message);
         }
@@ -76,7 +76,6 @@ export default (props) => {
 
   return (
     <>
-      <Toaster />
       {authContext.isAuthenticated && (
         <div className="max-w-lg w-96 mx-auto flex-1 flex flex-col items-center justify-center px-2 ">
           <div className="relative bg-white px-6 py-8 rounded-lg shadow-md text-black w-full">

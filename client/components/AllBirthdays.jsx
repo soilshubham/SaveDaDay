@@ -24,6 +24,7 @@ const UpcomingBirthdays = (props) => {
               name={item.name}
               date={convertDate(item.birthday)}
               desc={item.desc}
+              _id={item._id}
             />
           ))
         ) : (
