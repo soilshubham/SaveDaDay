@@ -6,6 +6,7 @@ import AuthService from "../services/AuthService";
 import { AuthContext } from "../context/AuthContext";
 import Toast from "./Toast";
 import { Toaster } from "react-hot-toast";
+
 const BirthdayCard = (props) => {
   const authContext = useContext(AuthContext);
 

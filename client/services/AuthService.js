@@ -9,6 +9,7 @@ export default {
             body: JSON.stringify(user)
         }).then(res => res.json()).then(data => data)
     },
+
     register: user => {
         return fetch(`http://localhost:5000/user/register`, {
             method: "POST",
@@ -18,6 +19,7 @@ export default {
             body: JSON.stringify(user)
         }).then(res => res.json()).then(data => data)
     },
+
     logout: () => {
         return fetch(`http://localhost:5000/user/logout`, {
             method: "GET",
@@ -27,6 +29,7 @@ export default {
             }
         }).then(res => res.json()).then(data => data)
     },
+
     isAuthenticated: () => {
         return fetch(`http://localhost:5000/user/authenticated`, {
             method: "GET",
@@ -42,6 +45,7 @@ export default {
 
         }).catch(err => { return { isAuthenticated: false, user: { username: "", role: "" } } })
     },
+
     getBirthdays: () => {
         return fetch(`http://localhost:5000/user/birthdays`, {
             method: "GET",
@@ -57,6 +61,7 @@ export default {
 
         })
     },
+
     addBirthday: (bday) => {
         return fetch(`http://localhost:5000/user/add-bday`, {
             method: "POST",
@@ -67,6 +72,7 @@ export default {
             body: JSON.stringify(bday)
         }).then(res => res.json()).then(data => data)
     },
+
     editBirthday: (bday) => {
         return fetch(`http://localhost:5000/user/edit-bday`, {
             method: "PUT",
@@ -77,6 +83,7 @@ export default {
             body: JSON.stringify(bday)
         }).then(res => res.json()).then(data => data)
     },
+
     deleteBirthday: (bday) => {
         return fetch(`http://localhost:5000/user/delete-bday`, {
             method: "POST",

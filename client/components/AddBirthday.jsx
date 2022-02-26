@@ -1,14 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useRouter } from "next/router";
 import AuthService from "../services/AuthService";
 import { AuthContext } from "../context/AuthContext";
 import { Toaster } from "react-hot-toast";
 import Toast from "./Toast";
 import { CgClose as CrossIcon } from "react-icons/cg";
 
-export default (props) => {
+const AddBirthday = (props) => {
   const editProp = props.edit || false;
-  console.log("id", editProp.id);
 
   const [bName, setBName] = useState("");
   const [bDate, setBDate] = useState("");
@@ -30,11 +28,10 @@ export default (props) => {
         date: bDate,
         desc: bDesc,
       }).then((data) => {
-        console.log(data);
         const { message, msgError } = data;
         if (!msgError) {
-          authContext.fetchBirthdays();
           props?.onSuccess(message);
+          authContext.fetchBirthdays();
           props.closeFunc();
         } else {
           Toast.error(message);
@@ -46,7 +43,6 @@ export default (props) => {
         birthday: bDate,
         desc: bDesc,
       }).then((data) => {
-        console.log(data);
         const { message, msgError } = data;
         if (!msgError) {
           authContext.fetchBirthdays();
@@ -76,6 +72,7 @@ export default (props) => {
 
   return (
     <>
+      <Toaster />
       {authContext.isAuthenticated && (
         <div className="max-w-lg w-96 mx-auto flex-1 flex flex-col items-center justify-center px-2 ">
           <div className="relative bg-white px-6 py-8 rounded-lg shadow-md text-black w-full">
@@ -114,7 +111,8 @@ export default (props) => {
 
             <button
               type="submit"
-              className="w-full text-center py-3 rounded bg-primary md:hover:opacity-90 text-white hover:bg-green-dark focus:outline-none my-1"
+              className="w-full text-center py-3 rounded bg-primary md:hover:opacity-90 
+                      text-white hover:bg-green-dark focus:outline-none my-1"
               onClick={(e) => onSubmit(e)}
             >
               {editProp ? "Edit" : "Add"}
@@ -125,3 +123,5 @@ export default (props) => {
     </>
   );
 };
+
+export default AddBirthday;

@@ -7,7 +7,7 @@ import AuthService from "../services/AuthService";
 import { AuthContext } from "../context/AuthContext";
 import { IoLogoStencil as Logo } from "react-icons/io5";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const { isAuthenticated, user, setUser, setIsAuthenticated, setBdays } =
     useContext(AuthContext);
 
@@ -23,6 +23,7 @@ const Navbar = (props) => {
       }
     });
   };
+
   return (
     <nav className="fixed md:relative top-0 w-full">
       <div className="flex justify-between items-center bg-foreColor py-[1rem] lg:px-32 px-4 shadow-lg shadow-[#5a5a5a0e] md:shadow-none">

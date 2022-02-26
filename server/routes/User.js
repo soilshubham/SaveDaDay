@@ -70,6 +70,31 @@ userRouter.post("/add-bday", passport.authenticate('jwt', { session: false }), (
     })
 });
 
+userRouter.put("/edit-bday", passport.authenticate('jwt', { session: false }), (req, res) => {
+    Birthday.updateOne(
+        { _id: req.body.id },
+        { $set: { birthday: req.body.date, name: req.body.name, desc: req.body.desc } },
+        (err, updatedBday) => {
+            if (err)
+                res.status(500).json({ message: err.message, msgError: true })
+            else
+                res.status(200).json({ message: "Birthday successfully updated", msgError: false })
+        }
+    )
+});
+
+userRouter.post("/delete-bday", passport.authenticate('jwt', { session: false }), (req, res) => {
+    Birthday.deleteOne(
+        { _id: req.body._id },
+        (err) => {
+            if (err)
+                res.status(500).json({ message: err.message, msgError: true })
+            else
+                res.status(200).json({ message: "Birthday successfully deleted", msgError: false })
+        }
+    )
+});
+
 userRouter.get("/birthdays", passport.authenticate('jwt', { session: false }), (req, res) => {
     User.findById({ _id: req.user._id }).populate('birthdays').exec((err, document) => {
         if (err)

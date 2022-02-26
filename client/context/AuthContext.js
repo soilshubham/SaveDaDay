@@ -12,14 +12,11 @@ export const AuthProvider = ({ children }) => {
 
   const fetchBirthdays = () => {
     if (localStorage.getItem("isLoggedIn")) {
-      AuthService.getBirthdays().then((data) => {
-        if (!data.msgError) setBdays(data.birthdays);
-        console.log(data.birthdays);
-      });
+      AuthService.getBirthdays().then((data) => { if (!data.msgError) setBdays(data.birthdays); });
     } else {
-      setUser({ name: "", username: "", role: "" }),
-        setIsAuthenticated(false),
-        setIsLoaded(true);
+      setUser({ name: "", username: "", role: "" })
+      setIsAuthenticated(false)
+      setIsLoaded(true)
     }
   };
 
@@ -31,9 +28,9 @@ export const AuthProvider = ({ children }) => {
         setIsLoaded(true);
       });
     } else {
-      setUser({ name: "", username: "", role: "" }),
-        setIsAuthenticated(false),
-        setIsLoaded(true);
+      setUser({ name: "", username: "", role: "" })
+      setIsAuthenticated(false)
+      setIsLoaded(true);
     }
   }, []);
 
