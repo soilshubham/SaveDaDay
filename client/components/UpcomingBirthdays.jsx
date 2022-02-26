@@ -34,10 +34,11 @@ const UpcomingBirthdays = (props) => {
             (item, indx) =>
               indx < 3 && (
                 <BirthdayCard
-                  key={item.id}
+                  key={item._id}
                   name={item.name}
                   date={convertDate(item.birthday)}
                   desc={item.desc}
+                  bId={item._id}
                 />
               )
           )

@@ -66,5 +66,25 @@ export default {
             },
             body: JSON.stringify(bday)
         }).then(res => res.json()).then(data => data)
-    }
+    },
+    editBirthday: (bday) => {
+        return fetch(`http://localhost:5000/user/edit-bday`, {
+            method: "PUT",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bday)
+        }).then(res => res.json()).then(data => data)
+    },
+    deleteBirthday: (bday) => {
+        return fetch(`http://localhost:5000/user/delete-bday`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bday)
+        }).then(res => res.json()).then(data => data)
+    },
 }

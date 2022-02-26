@@ -7,6 +7,9 @@ import Toast from "./Toast";
 import { CgClose as CrossIcon } from "react-icons/cg";
 
 export default (props) => {
+  const editProp = props.edit || false;
+  console.log("id", editProp.id);
+
   const [bName, setBName] = useState("");
   const [bDate, setBDate] = useState("");
   const [bDesc, setBDesc] = useState("");
@@ -19,8 +22,14 @@ export default (props) => {
       Toast.incompleteFieldsError("Please fill all the fields");
       return;
     }
-    AuthService.addBirthday({ name: bName, birthday: bDate, desc: bDesc }).then(
-      (data) => {
+
+    if (editProp) {
+      AuthService.editBirthday({
+        id: editProp.id,
+        name: bName,
+        date: bDate,
+        desc: bDesc,
+      }).then((data) => {
         console.log(data);
         const { message, msgError } = data;
         if (!msgError) {
@@ -30,9 +39,40 @@ export default (props) => {
         } else {
           Toast.error(message);
         }
-      }
-    );
+      });
+    } else {
+      AuthService.addBirthday({
+        name: bName,
+        birthday: bDate,
+        desc: bDesc,
+      }).then((data) => {
+        console.log(data);
+        const { message, msgError } = data;
+        if (!msgError) {
+          Toast.success(message);
+          authContext.fetchBirthdays();
+          setTimeout(() => props.closeFunc(), 1000);
+        } else {
+          Toast.error(message);
+        }
+      });
+    }
   };
+
+  useEffect(() => {
+    console.log(props);
+    if (editProp) {
+      setBName(editProp.name);
+      setBDate(editProp.date);
+      setBDesc(editProp.desc);
+    }
+
+    return () => {
+      setBName("");
+      setBDate("");
+      setBDesc("");
+    };
+  }, []);
 
   return (
     <>
@@ -78,7 +118,7 @@ export default (props) => {
               className="w-full text-center py-3 rounded bg-primary md:hover:opacity-90 text-white hover:bg-green-dark focus:outline-none my-1"
               onClick={(e) => onSubmit(e)}
             >
-              Add
+              {editProp ? "Edit" : "Add"}
             </button>
           </div>
         </div>
