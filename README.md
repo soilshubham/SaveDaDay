@@ -1,4 +1,4 @@
-# Birthday-Reminder [ Work In Progress ]
+# SaveDaDay - Birthday Reminder App
 
 A MERN application with NextJS and TailwindCSS, which allows user to manage the birthdays of their friends and family.
 
