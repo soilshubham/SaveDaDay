@@ -75,11 +75,11 @@ const AddBirthday = (props) => {
       <Toaster />
       {authContext.isAuthenticated && (
         <div className="max-w-lg w-96 mx-auto flex-1 flex flex-col items-center justify-center px-2 ">
-          <div className="relative bg-white px-6 py-8 rounded-lg shadow-md text-black w-full">
+          <div className="relative bg-white px-6 py-8 rounded-lg shadow-xl text-black w-full">
             <div className="absolute top-3 right-3 hover:bg-slate-200 p-1 rounded-lg cursor-pointer">
               <CrossIcon size={18} onClick={props.closeFunc} />
             </div>
-            <h1 className="mb-8 text-3xl md:text-2xl font-medium text-center">
+            <h1 className="mb-8 text-3xl md:text-2xl font-extrabold text-center">
               Add Birthday
             </h1>
             <input

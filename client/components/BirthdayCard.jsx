@@ -77,15 +77,15 @@ const BirthdayCard = (props) => {
                   <p className="text-gray-700 text-base mb-8">
                     Are you sure you want to delete this birthday?
                   </p>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center gap-5">
                     <button
-                      className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-3 px-10 rounded"
+                      className="bg-gray-800 hover:scale-105 transition-all text-white font-medium py-3 w-full px-10 rounded"
                       onClick={() => setShowDelModal(false)}
                     >
                       Cancel
                     </button>
                     <button
-                      className="bg-red-500 hover:bg-red-600 text-white font-medium py-3 px-10 rounded"
+                      className="bg-red-500 hover:scale-105 transition-all text-white font-medium py-3 px-10 w-full  rounded"
                       onClick={() => {
                         onClickDelete();
                         setShowDelModal(false);
@@ -142,7 +142,7 @@ const BirthdayCard = (props) => {
               )}
             </div>
           </div>
-          <div className="text-[1.6rem] md:text-2xl mt-2 truncate">
+          <div className="text-[1.6rem] md:text-2xl mt-2 truncate font-semibold">
             {props?.date}
           </div>
           <div className="text-sm mt-2 text-fadedColor truncate">

@@ -10,7 +10,8 @@ module.exports = {
 
     fontFamily: {
       'IBMSans': ['"IBM Plex Sans"', 'sans-serif'],
-      'Inter': ['"Inter"', 'sans-serif']
+      'Inter': ['"Inter"', 'sans-serif'],
+      'manrope': ['"Manrope"', 'sans-serif']
     },
     extend: {
       colors: {

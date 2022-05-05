@@ -21,16 +21,16 @@ userRouter.post("/register", (req, res) => {
 
     User.findOne({ username }, (err, user) => {
         if (err)
-            res.status(500).json({ message: "Error has occured", msgError: true })
+            return res.status(500).json({ message: "Error has occured 1", msgError: true })
         if (user)
-            res.status(400).json({ message: "Username already exists", msgError: true })
+            return res.status(400).json({ message: "Username already exists", msgError: true })
         else {
             const newUser = new User({ name, username, password, role })
             newUser.save((err, user) => {
                 if (err)
-                    res.status(500).json({ message: "Error has occured", msgError: true })
+                    return res.status(500).json({ message: "Error has occured 2", msgError: true })
                 else
-                    res.status(201).json({ message: "Account successfully created", msgError: false })
+                    return res.status(201).json({ message: "Account successfully created", msgError: false })
             })
         }
     })
